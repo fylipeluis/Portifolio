@@ -1,0 +1,108 @@
+#skills {
+  background: var(--bg2);
+}
+
+/* ── SKILLS LAYOUT ── */
+.skills-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── SKILL CARD ── */
+.skill-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  /* entrada via observer */
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.skill-card.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.skill-card:hover {
+  border-color: rgba(124, 106, 240, 0.4);
+  transform: translateY(-3px);
+}
+
+/* ── CARD CONTENT ── */
+.skill-icon {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.skill-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.skill-desc {
+  font-size: 0.82rem;
+  color: var(--text3);
+  font-weight: 300;
+}
+
+/* ── PROGRESS BAR ── */
+.skill-level {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.skill-fill {
+  height: 100%;
+  width: calc(var(--level) * 100%);
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
+  border-radius: 4px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: none;
+}
+
+/* animação só dispara quando o card entra na viewport */
+.skill-card.visible .skill-fill {
+  animation: fillBar 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fillBar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.skill-percent {
+  font-size: 0.78rem;
+  color: var(--text3);
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .skills-header {
+    grid-template-columns: 1fr;
+  }
+}
